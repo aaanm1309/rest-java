@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.adrianomenezes.model.Person;
+import br.com.adrianomenezes.data.vo.v1.PersonVO;
 import br.com.adrianomenezes.services.PersonService;
 
 @RestController
-@RequestMapping(value = "/person")
+@RequestMapping(value = "/api/person/v1")
 public class PersonController {
 	
 	@Autowired
@@ -28,7 +28,7 @@ public class PersonController {
 
 	
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Person findById(@PathVariable(value="id") String id)  
+	public PersonVO findById(@PathVariable(value="id") String id)  
 		throws Exception {
 
 		return personService.findById(Long.parseLong(id));
@@ -36,7 +36,7 @@ public class PersonController {
 	
 
 	@GetMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Person> findAll()  
+	public List<PersonVO> findAll()  
 		throws Exception {
 
 		return personService.findAll();
@@ -44,7 +44,7 @@ public class PersonController {
 	
 	@PostMapping( consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public Person create(@RequestBody Person person)  
+	public PersonVO create(@RequestBody PersonVO person)  
 			throws Exception {
 		
 		return personService.create(person);
@@ -53,7 +53,7 @@ public class PersonController {
 	@PutMapping( value = "/{id}"
 			, consumes = MediaType.APPLICATION_JSON_VALUE
 			, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Person update(@PathVariable(value="id") String id, @RequestBody Person person)  
+	public PersonVO update(@PathVariable(value="id") String id, @RequestBody PersonVO person)  
 			throws Exception {
 		
 		return personService.update(Long.parseLong(id), person);

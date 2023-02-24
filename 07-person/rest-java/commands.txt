@@ -1,0 +1,47 @@
+
+#6. Create Docker Network - rest_java
+
+docker network create --attachable -d bridge rest_java
+
+#7. Install or init docker compose
+
+https://docs.docker.com/compose/install
+
+
+#9. MySQL
+
+Run in Docker:
+docker run -it -d --name mysql-rest-java \
+-p 3307:3306 --network rest_java \
+-e MYSQL_ROOT_PASSWORD=1234 \
+-e MYSQL_USER=user -e MYSQL_PASSWORD=pass -e MYSQL_DATABASE=db \
+--restart always \
+-v mysql_data_container:/var/lib/mysql  \
+mysql:latest
+
+docker run -it -d --name mysql-rest-java-local \
+-p 3308:3306 \
+-e MYSQL_ROOT_PASSWORD=1234 \
+-e MYSQL_USER=user -e MYSQL_PASSWORD=pass -e MYSQL_DATABASE=db \
+--restart always \
+-v mysql_data_container:/var/lib/mysql  \
+mysql:latest
+
+Client tools in Docker – Adminer:
+docker run -it -d --name adminer \
+-p 8082:8080 --network rest_java \
+ -e ADMINER_DEFAULT_SERVER=mysql-rest-java \
+--restart always adminer:latest
+
+
+docker run -it -d --name adminer-local \
+-p 8083:8080  \
+ -e ADMINER_DEFAULT_SERVER=mysql-rest-java-local \
+--restart always adminer:latest
+
+
+docker run --name mysql57 \
+-p 3309:3306 -e MYSQL_ROOT_PASSWORD=1234 \
+-e MYSQL_USER=user -e MYSQL_PASSWORD=pass -e MYSQL_DATABASE=db \
+-d mysql/mysql-server:5.7
+

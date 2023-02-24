@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+
+  dbpostgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: restjava
+      POSTGRES_USER: adriano
+      POSTGRES_PASSWORD: adr1234
+    ports:
+      - 5434:5432
+    networks:
+      - rest_java
+
+  dbmysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: restjava
+      MYSQL_USER: adriano
+      MYSQL_PASSWORD: adr123
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - 3310:3306
+    volumes:
+      - /opt/mysql-data:/var/lib/mysql
+    networks:
+      - rest_java
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8090:8080
+    networks:
+      - rest_java
+
+networks:
+  rest_java:
+  
+  

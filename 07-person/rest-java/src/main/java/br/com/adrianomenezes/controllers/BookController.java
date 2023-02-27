@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.adrianomenezes.data.vo.v1.PersonVO;
-import br.com.adrianomenezes.services.PersonService;
+import br.com.adrianomenezes.data.vo.v1.BookVO;
+import br.com.adrianomenezes.services.BookService;
 import br.com.adrianomenezes.util.MediaTypeCustom;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -26,29 +26,30 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping(value = "/api/person/v1")
-@Tag(name = "People", description = "EndPoint to manage People")
-public class PersonController {
+@RequestMapping(value = "/api/book/v1")
+@Tag(name = "Books", description = "EndPoint to manage Books")
+public class BookController {
 
 	@Autowired
-	private PersonService personService;
+	private BookService bookService;
 
 	
 	@GetMapping(value = "/{id}"
-			, produces = {	MediaTypeCustom.APPLICATION_JSON,
-							MediaTypeCustom.APPLICATION_XML,
-							MediaTypeCustom.APPLICATION_YML})
-	@Operation(summary = "Finds a Person"
-	, description = "EndPoint to Finds a Person",
-	tags = {"People"},
+			, produces = {	MediaTypeCustom.APPLICATION_JSON
+//							,MediaTypeCustom.APPLICATION_XML,
+//							MediaTypeCustom.APPLICATION_YML
+							})
+	@Operation(summary = "Finds a Book"
+	, description = "EndPoint to Finds a Book",
+	tags = {"Books"},
 	responses = {
 			@ApiResponse(description = "Success", responseCode = "200", content =  {
 					@Content(
 							mediaType = "application/json",
-							 schema = @Schema(implementation = PersonVO.class))
-					,@Content(
-							mediaType = "application/xml",
-							 schema = @Schema(implementation = PersonVO.class))
+							 schema = @Schema(implementation = BookVO.class))
+//					,@Content(
+//							mediaType = "application/xml",
+//							 schema = @Schema(implementation = BookVO.class))
 					
 			} ),
 			@ApiResponse(description = "No Content", responseCode = "204", content =  @Content ),
@@ -58,27 +59,27 @@ public class PersonController {
 			@ApiResponse(description = "Not Acceptable", responseCode = "406", content =  @Content ),
 			@ApiResponse(description = "Internal Error", responseCode = "500", content =  @Content )
 	})
-	public PersonVO findById(@PathVariable(value="id") Long id)  
+	public BookVO findById(@PathVariable(value="id") Long id)  
 		throws Exception {
 
-		return personService.findById(id);
+		return bookService.findById(id);
 	}
 	
 
 	@GetMapping( produces = {	MediaTypeCustom.APPLICATION_JSON,
 								MediaTypeCustom.APPLICATION_XML,
 								MediaTypeCustom.APPLICATION_YML})
-	@Operation(summary = "Find All People"
-			, description = "EndPoint to Find All People",
-			tags = {"People"},
+	@Operation(summary = "Find All Books"
+			, description = "EndPoint to Find All Books",
+			tags = {"Books"},
 			responses = {
 					@ApiResponse(description = "Success", responseCode = "200", content =  {
 							@Content(
 									mediaType = "application/json",
-									array = @ArraySchema( schema = @Schema(implementation = PersonVO.class)))
-							,@Content(
-									mediaType = "application/xml",
-									array = @ArraySchema( schema = @Schema(implementation = PersonVO.class)))
+									array = @ArraySchema( schema = @Schema(implementation = BookVO.class)))
+//							,@Content(
+//							mediaType = "application/xml",
+//							 schema = @Schema(implementation = BookVO.class))
 							
 					} ),
 					@ApiResponse(description = "Bad Request", responseCode = "400", content =  @Content ),
@@ -87,10 +88,10 @@ public class PersonController {
 					@ApiResponse(description = "Not Acceptable", responseCode = "406", content =  @Content ),
 					@ApiResponse(description = "Internal Error", responseCode = "500", content =  @Content )
 			})
-	public List<PersonVO> findAll()  
+	public List<BookVO> findAll()  
 		throws Exception {
 
-		return personService.findAll();
+		return bookService.findAll();
 	}
 	
 	@PostMapping( consumes = {	MediaTypeCustom.APPLICATION_JSON,
@@ -99,27 +100,28 @@ public class PersonController {
 				produces = {	MediaTypeCustom.APPLICATION_JSON,
 								MediaTypeCustom.APPLICATION_XML,
 								MediaTypeCustom.APPLICATION_YML})
-	@Operation(summary = "Adds a new Person"
-	, description = "EndPoint to Adds a new Person by passing in a Json, XML or yml representtation of a person ",
-	tags = {"People"},
+	@Operation(summary = "Adds a new Book"
+	, description = "EndPoint to Adds a new Book by passing in a Json, XML or yml representtation of a person ",
+	tags = {"Books"},
 	responses = {
 			@ApiResponse(description = "Success", responseCode = "200", content =  {
 					@Content(
 							mediaType = "application/json",
-							 schema = @Schema(implementation = PersonVO.class))
-					,@Content(
-							mediaType = "application/xml",
-							 schema = @Schema(implementation = PersonVO.class))
+							 schema = @Schema(implementation = BookVO.class))
+//					,@Content(
+//					mediaType = "application/xml",
+//					 schema = @Schema(implementation = BookVO.class))
+					
 			} ),
 			@ApiResponse(description = "Bad Request", responseCode = "400", content =  @Content ),
 			@ApiResponse(description = "Unauthorized", responseCode = "401", content =  @Content ),
 			@ApiResponse(description = "Not Acceptable", responseCode = "406", content =  @Content ),
 			@ApiResponse(description = "Internal Error", responseCode = "500", content =  @Content )
 	})
-	public PersonVO create(@RequestBody PersonVO person)  
+	public BookVO create(@RequestBody BookVO bookVO)  
 			throws Exception {
 		
-		return personService.create(person);
+		return bookService.create(bookVO);
 	}
 	
 	@PutMapping( value = "/{id}"
@@ -129,17 +131,17 @@ public class PersonController {
 			produces = {	MediaTypeCustom.APPLICATION_JSON,
 							MediaTypeCustom.APPLICATION_XML,
 							MediaTypeCustom.APPLICATION_YML})
-	@Operation(summary = "Update a existent Person"
-	, description = "EndPoint to Update a existent Person by passing in a Json, XML or yml representtation of a person ",
-	tags = {"People"},
+	@Operation(summary = "Update a existent Book"
+	, description = "EndPoint to Update a existent Book by passing in a Json, XML or yml representtation of a person ",
+	tags = {"Books"},
 	responses = {
 			@ApiResponse(description = "Updated", responseCode = "200", content =  {
 					@Content(
 							mediaType = "application/json",
-							 schema = @Schema(implementation = PersonVO.class))
-					,@Content(
-							mediaType = "application/xml",
-							 schema = @Schema(implementation = PersonVO.class))
+							 schema = @Schema(implementation = BookVO.class))
+//					,@Content(
+//					mediaType = "application/xml",
+//					 schema = @Schema(implementation = BookVO.class))
 					
 			} ),
 			@ApiResponse(description = "Bad Request", responseCode = "400", content =  @Content ),
@@ -148,15 +150,15 @@ public class PersonController {
 			@ApiResponse(description = "Not Acceptable", responseCode = "406", content =  @Content ),
 			@ApiResponse(description = "Internal Error", responseCode = "500", content =  @Content )
 	})
-	public PersonVO update(@PathVariable(value="id") Long id, @RequestBody PersonVO person)  
+	public BookVO update(@PathVariable(value="id") Long id, @RequestBody BookVO book)  
 			throws Exception {
 		
-		return personService.update(id, person);
+		return bookService.update(id, book);
 	}
 	
-	@Operation(summary = "Deletes a Person"
-	, description = "EndPoint to Delete a Person",
-	tags = {"People"},
+	@Operation(summary = "Deletes a Book"
+	, description = "EndPoint to Delete a Book",
+	tags = {"Books"},
 	responses = {
 			@ApiResponse(description = "No Content", responseCode = "204", content =  @Content ),
 			@ApiResponse(description = "Bad Request", responseCode = "400", content =  @Content ),
@@ -172,7 +174,7 @@ public class PersonController {
 	public ResponseEntity<?> delete(@PathVariable(value="id") Long id)  
 			throws Exception {
 		
-		personService.delete(id);
+		bookService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	

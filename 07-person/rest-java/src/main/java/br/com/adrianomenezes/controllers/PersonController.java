@@ -5,7 +5,6 @@ package br.com.adrianomenezes.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,32 +17,42 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.adrianomenezes.data.vo.v1.PersonVO;
 import br.com.adrianomenezes.services.PersonService;
+import br.com.adrianomenezes.util.MediaTypeCustom;
 
 @RestController
 @RequestMapping(value = "/api/person/v1")
 public class PersonController {
-	
+
 	@Autowired
 	private PersonService personService;
 
 	
-	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public PersonVO findById(@PathVariable(value="id") String id)  
+	@GetMapping(value = "/{id}"
+			, produces = {	MediaTypeCustom.APPLICATION_JSON,
+							MediaTypeCustom.APPLICATION_XML,
+							MediaTypeCustom.APPLICATION_YML})
+	public PersonVO findById(@PathVariable(value="id") Long id)  
 		throws Exception {
 
-		return personService.findById(Long.parseLong(id));
+		return personService.findById(id);
 	}
 	
 
-	@GetMapping( produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping( produces = {	MediaTypeCustom.APPLICATION_JSON,
+								MediaTypeCustom.APPLICATION_XML,
+								MediaTypeCustom.APPLICATION_YML})
 	public List<PersonVO> findAll()  
 		throws Exception {
 
 		return personService.findAll();
 	}
 	
-	@PostMapping( consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping( consumes = {	MediaTypeCustom.APPLICATION_JSON,
+								MediaTypeCustom.APPLICATION_XML,
+								MediaTypeCustom.APPLICATION_YML},
+				produces = {	MediaTypeCustom.APPLICATION_JSON,
+								MediaTypeCustom.APPLICATION_XML,
+								MediaTypeCustom.APPLICATION_YML})
 	public PersonVO create(@RequestBody PersonVO person)  
 			throws Exception {
 		
@@ -51,20 +60,26 @@ public class PersonController {
 	}
 	
 	@PutMapping( value = "/{id}"
-			, consumes = MediaType.APPLICATION_JSON_VALUE
-			, produces = MediaType.APPLICATION_JSON_VALUE)
-	public PersonVO update(@PathVariable(value="id") String id, @RequestBody PersonVO person)  
+			, consumes = {	MediaTypeCustom.APPLICATION_JSON,
+							MediaTypeCustom.APPLICATION_XML,
+							MediaTypeCustom.APPLICATION_YML},
+			produces = {	MediaTypeCustom.APPLICATION_JSON,
+							MediaTypeCustom.APPLICATION_XML,
+							MediaTypeCustom.APPLICATION_YML})
+	public PersonVO update(@PathVariable(value="id") Long id, @RequestBody PersonVO person)  
 			throws Exception {
 		
-		return personService.update(Long.parseLong(id), person);
+		return personService.update(id, person);
 	}
 	
 	@DeleteMapping( value = "/{id}"
-			, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> delete(@PathVariable(value="id") String id)  
+			, produces = {	MediaTypeCustom.APPLICATION_JSON,
+							MediaTypeCustom.APPLICATION_XML,
+							MediaTypeCustom.APPLICATION_YML})
+	public ResponseEntity<?> delete(@PathVariable(value="id") Long id)  
 			throws Exception {
 		
-		personService.delete(Long.parseLong(id));
+		personService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	

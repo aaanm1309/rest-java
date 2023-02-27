@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+//@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/book/v1")
 @Tag(name = "Books", description = "EndPoint to manage Books")
@@ -33,11 +35,11 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 
-	
+//	@CrossOrigin(origins = {"http://localhost:8080"})
 	@GetMapping(value = "/{id}"
 			, produces = {	MediaTypeCustom.APPLICATION_JSON
-//							,MediaTypeCustom.APPLICATION_XML,
-//							MediaTypeCustom.APPLICATION_YML
+							,MediaTypeCustom.APPLICATION_XML,
+							MediaTypeCustom.APPLICATION_YML
 							})
 	@Operation(summary = "Finds a Book"
 	, description = "EndPoint to Finds a Book",

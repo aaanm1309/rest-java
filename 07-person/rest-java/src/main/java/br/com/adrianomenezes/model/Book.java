@@ -13,9 +13,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name="books")
+@XmlRootElement
 public class Book implements Serializable{
 
 

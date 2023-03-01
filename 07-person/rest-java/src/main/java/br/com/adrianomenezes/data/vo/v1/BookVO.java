@@ -11,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.github.dozermapper.core.Mapping;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 @JsonPropertyOrder({"id","author","title","price","launchDate"})
 public class BookVO extends RepresentationModel<BookVO> implements Serializable {
 
@@ -23,7 +25,7 @@ public class BookVO extends RepresentationModel<BookVO> implements Serializable 
 	private Long key;
 	
 	private String author;
-	@JsonProperty("launch_date")
+//	@JsonProperty("launch_date")
 	private Date launchDate;
 	private BigDecimal price;
 	private String title;

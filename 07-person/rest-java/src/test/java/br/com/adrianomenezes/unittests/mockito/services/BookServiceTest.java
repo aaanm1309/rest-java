@@ -46,8 +46,7 @@ class BookServiceTest {
 	void setUpMocks() throws Exception {
 		input = new MockBook();
 		MockitoAnnotations.openMocks(this);
-		
-		
+
 	}
 
 	@Test
@@ -67,7 +66,6 @@ class BookServiceTest {
 		assertEquals(entity.getPrice(),result.getPrice());
 		assertEquals(entity.getLaunchDate(),result.getLaunchDate());
 		assertNotNull(result.getLaunchDate());
-		
 		
 	}
 

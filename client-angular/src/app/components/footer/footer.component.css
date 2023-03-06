@@ -1,0 +1,12 @@
+
+.container {
+    display: flex;
+    margin-top: 5px;
+    justify-content: right;
+
+}
+
+img {
+    padding: 1rem 3%;
+    width: 4rem;
+} 

@@ -6,7 +6,7 @@
              <i class="material-icons">home</i>
              Home
           </a>
-          <a mat-list-item routerLink="tecnicos">
+          <a mat-list-item routerLink="/">
              <i class="material-icons">account_circle</i>
              Técnicos
           </a>
@@ -30,12 +30,12 @@
     </mat-drawer>
  
     <div class="sidenav-content">
-       <!-- <app-header></app-header> -->
+       <app-header></app-header>
        <button class="menu mat-elevation-z8" (click)="drawer.toggle()" mat-icon-button>
           <mat-icon>menu</mat-icon>
        </button>
        <router-outlet></router-outlet>
-       <img src="assets/img/LogoAdriano6.svg" alt="Imagem de navegação">
+       <app-footer></app-footer>
     </div>
  
  </mat-drawer-container>
